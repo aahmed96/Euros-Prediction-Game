@@ -1,0 +1,74 @@
+{% extends "euros20/layout.html" %}
+
+{% block body %}
+
+<!-- <div class="form-group">
+</div> -->
+<div class="row page">
+    <div class="col-12">
+        <div class="row justify-content-center home">
+            <div class="col-8 form-container">
+                <h3>Your Profile</h3>
+
+                <form class="row g-3" action="" method="post">
+                    {% csrf_token %}
+                    {{Profile_Form.user_name}}
+                    
+
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label">First Name</label>
+                        {{Profile_Form.first_name}}  
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label">Last Name</label>
+                      {{Profile_Form.last_name}}    
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputAddress2" class="form-label">Favorite Team</label>
+                        {{Profile_Form.favorite_team}}     
+                    </div>
+                    <div>
+                      <h4>
+                        Select your picks
+                      </h4>
+                      <p>
+                        Carefully select your list as this can not be changed after the tournament starts. Each team/player has specific points assigned to them, refer to Rules and Rewards for more information
+                      </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputAddress2" class="form-label">Euros Winner</label>
+                        {{Profile_Form.euro_winner}}   
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputAddress2" class="form-label">Golden Boot</label>
+                        {{Profile_Form.golden_boot}}   
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">Golden Ball</label>
+                        {{Profile_Form.golden_ball}}   
+           
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputState" class="form-label">Young Player</label>
+                        {{Profile_Form.young_player}}   
+                        
+                      </div>
+                      
+                      
+
+                    <div class="col-12 button-container">
+                        <!-- <input type="submit" name="submit"> -->
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </form>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} 

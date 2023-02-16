@@ -1,0 +1,241 @@
+body {
+    font-family: 'Lato', sans-serif;
+    /* border: 2px solid black; */
+}
+
+.show-border {
+    border: 1px solid black;
+}
+
+.show-border-right {
+    border-right: 1px solid black;
+}
+
+/* NAV BAR */
+.nav-bar {
+    /* border: 1px solid green; */
+    border-bottom: 5px solid gray;
+    background: #06424e;
+    color:white;
+    padding-bottom: 8px;
+}
+
+.nav-bar .left {
+    /* border: 1px solid green; */
+    margin-left: 10px;
+}
+
+.left .logo {
+    background-image: url('UEFA_Euro_2020_Logo.png');
+    background-position: 20% 45%;
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    height: 110px;
+}
+
+.nav-bar .middle {
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-bar .right {
+    font-weight: 300;
+}
+
+.right .options {
+    font-weight: 300;
+    letter-spacing: 0.015rem;
+}
+
+.page {
+    background-color:#fbfbfd !important;
+
+    height: auto;
+}
+
+/* HOME PAGE */
+
+.home {
+    /* border: 1px solid red; */
+    margin-top: 40px;
+}
+
+.table-container h3 {
+    /* border: 1px solid blue; */
+    /* text-transform: uppercase; */
+    font-weight: 300;
+    letter-spacing: 0.035rem;
+}
+
+.table-container .table {
+    /* border: 1px solid red; */
+    margin-top: 20px;
+}
+
+.table th {
+    font-weight: 300;
+}
+
+.rent-new-container {
+    margin-top: 25px;
+    /* border: 1px solid red; */
+}
+
+.table tbody {
+    height: 100px;
+    overflow: auto
+}
+
+.rent-new-container .btn {
+    border-radius: 10px;
+    /* border: 1px solid lightgray;  */
+    width: 250px;
+    font-weight: 300;
+}
+
+
+/* VEHICLES */
+
+.grid-container .the-grid {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px 10px;
+}
+
+/*CUSTOMER PROFILE*/
+
+
+/*RENTAL FORM*/
+
+.form-container h3 {
+    font-weight: 300;
+    letter-spacing: 0.035rem;
+}
+
+.form-container form {
+    /* border: 1px solid blue; */
+    margin-top: 0px;
+}
+
+form .button-container {
+    text-align: center;
+}
+
+form .button-container .btn {
+    margin-top: 6px;
+}
+
+.login-image {
+    background-image: url('UEFA_Euro_2020_Logo.png');
+    background-position: center;
+    background-size: 180px 200px;
+    background-repeat: no-repeat; 
+    height: 200px;
+    border-radius: 10px;
+    /* border: 1px solid green; */
+}
+
+.default-container {
+    border: 1px solid black;
+    background: rgb(255, 255, 255);
+    height: 100vh;
+
+}
+
+.boxes {
+    margin-top: 50px;
+   
+}
+
+
+.boxes .details {
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.details .detail-box {
+    /* border: 1px solid blue; */
+    border-radius: 10px;
+    background: whitesmoke;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 lightgray;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 lightgray;
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 lightgray;
+}
+
+.detail-box .btn {
+    width: 25%;
+    background:#036674;
+    border: none;
+}
+
+.error {
+    margin-left: 2px;
+    margin-bottom: 20px;
+    width: 99%;
+    font-weight: 500;
+    font-size: 16px;
+    border-left: 4px solid red;
+    background: white; 
+}
+
+/* CONFIRMATION */
+.confirm-container {
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 lightgray;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 lightgray;
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 lightgray;
+}
+
+.confirm-container .header {
+    text-align: center;
+    color: lightcoral;
+    letter-spacing: 0.045rem;
+}
+
+.confirm-container .details {
+    text-align: center;
+    line-height: 1.5rem;
+    letter-spacing: 0.025rem;
+}
+
+.confirm-container .details .item {
+    margin-bottom: 10px;
+  }
+
+
+.confirm-container .details .item span:nth-child(2) {
+    font-weight: 300;
+}
+
+/* DELETE */
+.delete-container {
+    background: white;
+    border: 2px solid whitesmoke;
+    border-radius: 15px;
+}
+
+.delete-container .header {
+    text-align: center;
+    /* color: lightcoral; */
+    letter-spacing: 0.045rem;
+}
+
+.delete-container .header span {
+    letter-spacing: 0rem;
+    font-weight: 300;
+    font-size: 14px;
+    color: red;
+}
+
+.btn-outline-light {
+    background-color:#696969 !important;
+}

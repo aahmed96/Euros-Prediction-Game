@@ -1,0 +1,245 @@
+{% extends "euros20/layout.html" %}
+
+{% block body %}
+<h2 style="padding-left:20px;padding-top:10px">
+    Welcome, {{request.user}}
+</h2>
+
+<div class='row align-items-start'>
+    <div class="col-8" style="padding:20px;">
+        <h3>Matchday 4</h3>
+        {% if matches %}
+        <div style="height: 400px;overflow:scroll;background: #77123b;
+        border-radius: 15px;
+        padding: 9px;color:white">
+        <table class="table">
+        
+            <thead>
+                <tr style="color:white">
+                    
+                    <th scope="col-2">Match</th>
+                    <th scope="col-2">Time</th>
+                    <th scope="col-1">Timer</th>
+                    <th scope="col-1">Prediction</th>
+                    <th scope="col-1"></th>
+                
+                  </tr>
+            </thead>
+
+            <tbody>
+                {% for match in matches %}
+                {% if time_now < match.match_datetime %}
+                <tr style="color:white">
+                    
+                    {% if match.score_1 is None %}
+                    <td>{{match.team_1}} vs {{match.team_2}} 
+                        {% if match.competetive is True %}
+                        [Competetive] 
+                        {% endif %}
+                    </td>
+                    {% else %}
+                    <td>{{match.team_1}} {{match.score_1}} - {{match.score_2}} {{match.team_2}}
+                        {% if match.competetive is True %}
+                        [Competetive]
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                    <td>{{match.match_datetime}}</td>
+                    
+                    {% for timer in timers %}
+                    {% if timer.0 == match.match_id %}
+                    
+                    <td>{{timer.1}}h</td>
+
+                    {% endif %}
+                    {% endfor %}
+
+                    {% for prediction in predictions %}
+                    {% if prediction.match_id.pk == match.pk %}
+                    <td>{{prediction.p_score1}} - {{prediction.p_score2}} ({{prediction.p_winner}}, {{prediction.p_endtime}})</td>
+                    {% endif %}
+                
+                    {% endfor %}
+                    
+                    
+        
+                        <td>
+                        <a href="{%url 'predict' match.match_id %}" class="btn btn-outline-light btn-sm" tabindex="-1" role="button" aria-disabled="true">Predict</a>
+                        </td>
+                    
+                    
+                    
+                
+                </tr>
+            {% endif %}
+                
+            {% endfor %}
+
+            </tbody>
+
+        </table >
+        {% endif %}
+    </div>
+
+
+
+    </div>
+    
+
+    <div class="col-4" style="padding:20px;">
+        <h3>Leaderboard</h3>
+        <div style="height: 400px;overflow:scroll;background: #cad3d7;border-radius:15px;padding:20px">
+        <table class="table">
+        
+            <thead>
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Points</th>
+                  </tr>
+            </thead>
+
+            
+            <tbody >
+                {% for entry in leaderboard %}
+                {% if entry.1 == userFullName %}
+                <tr style="background-color: #056978;color: white">
+                    <th scope='row'>{{forloop.counter}}</th>
+                    
+                    <td>{{entry.1}}</td>
+                
+                    <td>{{entry.2|floatformat:0 }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <th scope='row'>{{forloop.counter}}</th>
+                    
+                    <td>{{entry.1}}</td>
+                
+                    <td>{{entry.2|floatformat:0 }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        
+        </table>
+    </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+</div>
+
+<div class='row align-items-start'>
+
+    <div class = 'col-8' style="padding:20px;">
+        <h3>Your Predictions</h3>
+    
+        <div style="height: 400px;overflow:scroll;background: #06424e;border-radius:15px;padding:20px;color:white">
+        {% if predictions %}
+        <table class='table' style='color:white;font-weight:light'>
+            <thead>
+                <tr>
+                    <th scope='col'>Match</th>
+                    <th scope='col'>Prediction</th>
+                    <th scope='col'>Points</th>
+                    <th scope='col'></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prediction in predictions %}
+                {% if prediction.p_points > 0 %}
+                <tr style="background-color:#98c33e;color:rgb(255, 255, 255);opacity:95%;border-radius: 15px;">
+                <td>{{prediction.match_id.team_1}} vs {{prediction.match_id.team_2}}</td>
+                <td>{{prediction.p_score1}} - {{prediction.p_score2}}
+                    {% if prediction.p_winner is not None %}
+                    ({{prediction.p_winner}}, {{prediction.p_endtime}})
+                    {% endif %}
+
+                </td>
+                <td>{{prediction.p_points|floatformat:0}}</td>
+                {% if prediction.match_id.match_datetime < time_now %}
+                <td>
+                    <a href="{%url 'pastPredict' prediction.match_id %}" class="btn btn-outline-light btn-sm" tabindex="-1" role="button" aria-disabled="true">Predictions</a>
+                    </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                
+            </tr>
+            {% else %}
+            <tr style="font-weight: lighter;">
+                <td>{{prediction.match_id.team_1}} vs {{prediction.match_id.team_2}}</td>
+                <td>{{prediction.p_score1}} - {{prediction.p_score2}}
+                    {% if prediction.p_winner is not None %}
+                    ({{prediction.p_winner}}, {{prediction.p_endtime}})
+                    {% endif %}
+                </td>
+                <td>{{prediction.p_points|floatformat:0}}</td>
+                {% if prediction.match_id.match_datetime < time_now %}
+                <td>
+                    <a href="{%url 'pastPredict' prediction.match_id %}" class="btn btn-outline-light btn-sm" tabindex="-1" role="button" aria-disabled="true">Predictions</a>
+                    </td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                
+            </tr>
+            {% endif %}
+
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    </div>
+
+    <div class = 'col-4' style="padding:20px;">
+        <h3>
+            Your picks
+        </h3>
+        <table class='table' style="background: #63375b;border-radius:15px;color:white;padding:35px;">
+            <thead>
+                <tr>
+                    <th scope='col-2'>Type</th>
+                    <th scope='col-3'>Selection</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if picks %}
+            
+            <tr>
+                <td style="font-weight:lighter">EURO 2020 Champions</td>
+                <td>{{picks.euro_winner}}</td>
+            </tr>
+
+            <tr>
+                <td style="font-weight:lighter">Golden Ball Award</td>
+                <td>{{picks.golden_ball}}</td>
+            </tr>
+
+            <tr>
+                <td style="font-weight:lighter">Golden Boot Award</td>
+                <td>{{picks.golden_boot}}</td>
+            </tr>
+
+            <tr>
+                <td style="font-weight:lighter">Young Player</td>
+                <td>{{picks.young_player}}</td>
+            </tr>
+        </tbody>
+        
+
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

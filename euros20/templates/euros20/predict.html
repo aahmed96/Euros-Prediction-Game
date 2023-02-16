@@ -1,0 +1,96 @@
+{% extends "euros20/layout.html" %}
+
+{% block body %}
+
+<div class="row page">
+    <div class="col-12">
+        <div class="row justify-content-center home">
+            <div class="col-8 form-container">
+                <h4 style='text-align:center'>PREDICTION</h4>
+                <p style='text-align:center'>Final Point system</p>
+                <div class="row justify-content-center">
+                <div class="col-8">
+                  <table class='table'>
+                    <thead>
+                      <tr>
+                        <th scope='col-7'>Event</th>
+                        <th scope='col-1'>Points</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Correct team to progress</td>
+                        <td> 12 </td>
+                      </tr>
+                      <tr>
+                        <td>Correct Full-time scoreline </td>
+                        <td> 12 </td>
+                      </tr>
+                      <tr>
+                        <td>Correctly predict match ends in Full-time</td>
+                        <td> 4 </td>
+                      </tr>
+                      <tr>
+                        <td>Correctly predict that match goes overtime (either ET or Pens)</td>
+                        <td> 8 </td>
+                      </tr>
+                      <tr>
+                        <td>Correctly predict whether match ends in ET or Penalties</td>
+                        <td> 4 </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  
+                </div>
+                </div>
+                <p style="color:red !important;">{{ Prediction_Form.non_field_errors }} </p>
+                {% for message in messages %}
+                <h4 style="text-align: center;color:red">{{message}}</h1>
+                {% endfor %}
+
+                <form class="row g-3" action="" method="post">
+                    {% csrf_token %}
+                    
+                    <div class = "row" style="text-align: center;">
+                    <h5 style="text-align: center">FULLTIME SCORE</h5>
+                    
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label">{{match.team_1}}</label>
+                      {{Prediction_Form.p_score1}}
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label">{{match.team_2}}</label>
+                      {{Prediction_Form.p_score2}}
+                    </div>
+                  </div>
+                  <div class = "row justify-content-center" style="text-align: center;padding-top:20px;">
+                  <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">End-time</label>
+                    {{Prediction_Form.p_endtime}}
+                
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Winner</label>
+                    {{Prediction_Form.p_winner}}
+                
+                  </div>
+              
+                      
+              </div>
+                    
+                    <div class="col-12 button-container">
+                        <!-- <input type="submit" name="submit"> -->
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </form>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} 
+
+{% endblock}

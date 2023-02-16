@@ -1,0 +1,178 @@
+{% extends "euros20/layout.html" %}
+
+{% block body %}
+
+<div class="row page">
+    <div class="col-12">
+        <div class="row justify-content-center home">
+            <div class="col-12" style="text-align: center;padding-bottom:3px;">
+                <h6>{{match.match_datetime}}</h6>
+                <h7 style="font-weight: lighter;
+                background: #3a7f8a;
+                color: #ffffff;
+                padding: 7px;
+                border-radius: 20px;
+                font-size: small;">
+                 F I N A L </h7>
+                {% if match.score_1 is not None %}
+                <h2 style="padding-top:10px;">{{match.team_1}} {{match.score_1}} - {{match.score_2}} {{match.team_2}}</h2>
+                {% else %}
+                <h2 style="padding-top:10px;">{{match.team_1}} vs {{match.team_2}}</h2>
+                {% endif %} 
+            </div>
+            
+            <div class="row justify-content-center">
+
+            <div class="col-3">
+                <table class = "table" style="text-align: center;
+                background: #06424e;border-radius:15px;padding:20px;color:white">
+                    <thead>
+                        <tr style="background: rgb(71, 71, 71);">
+                            <th>{{match.team_1}}</th>
+                            
+                            <th>{{match.team_2}}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                        {% for result in results %}
+                        {% if forloop.counter == actual %}
+                            <td style="background-color: green;">{{result}}</td>
+                            {% else %}
+                            <td>{{result}}</td>
+                        {% endif %}
+                            {% endfor %}
+                        </tr>
+                       
+                    </tbody>
+                    
+                </table>
+                
+            </div>
+            <div class = 'col-4'>
+            <table class = "table" style="text-align: center;
+            background: #06424e;border-radius:15px;padding:20px;color:white">
+            <thead>
+                <tr style="background: rgb(71, 71, 71);">
+                    <th>Full time</th>
+                    <th>Extra time</th>
+                    <th>Penalties</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    {% for endtime in endtimes %}
+                    {% if forloop.counter == end %}
+                    <td style="background-color: green;">
+                        {{endtime}}
+                    </td>
+                    {% else %}
+                    <td>{{endtime}}</td>
+                    {% endif %}
+                    
+        
+                    {% endfor %}
+                </tr>
+                
+
+
+            </tbody>
+            </table>
+        </div>
+                
+                
+        </div>
+
+
+
+            <div class="col-7" style="padding:25px;background: #0d424c;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;color:white;
+            ">
+                <h3 style='padding-bottom: 10px;'>Scoreboard</h3>
+            <div style="height: 350px;overflow:scroll;">
+            <table class="table" style="background: #06424ef5;border-radius:15px;
+            padding-top:25px;color:white;text-align: center;">
+                <thead>
+                    <tr style="background:silver;color:black">
+                        <th scope="col">Name</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">Endtime</th>
+                        <th scope="col">Points</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for prediction in predictions %}
+                    <tr>
+                        {% if current_user.first_name == prediction.user_id.first_name %}
+                        <td style="background:rgb(2, 150, 155);">
+                        {{prediction.user_id.first_name}} {{prediction.user_id.last_name}}</td>
+                        {% else %}
+                        <td>{{prediction.user_id.first_name}} {{prediction.user_id.last_name}}</td>
+                        {% endif %}
+
+                        <td>{{prediction.p_score1}} - {{prediction.p_score2}}</td>
+                        <td>{{prediction.p_winner}}</td>
+                        <td>{{prediction.p_endtime}}</td>
+                        {% if prediction.p_points > 0 %}
+                        <td style="background-color: rgb(15, 141, 47);">{{prediction.p_points|floatformat:0}}</td>
+                        {% else %}
+                        <td>{{prediction.p_points|floatformat:0}}</td>
+                        {% endif %}
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+
+
+            </table>
+        </div>
+
+            </div>
+
+            <div class="col-3" style="padding:25px;background: #063a4e;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;color:white;margin-left: 30px;">
+                <h4 style='padding-bottom: 10px;'>Top predictions</h3>
+                <table class="table" style="text-align: center;
+                background: #063a4e;border-radius:15px;padding:20px;color:white">
+                    <thead>
+                        <tr style="background: rgb(71, 71, 71);" >
+                            <th scope="col-2">Score</th>
+                            <th scope="col-1">Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for score in scores %}
+                        {% if score.0 == actual_result %}
+                        <tr style="background:rgb(15, 141, 47)">
+
+                            <td>{{score.0}}</td>
+                            <td>{{score.1}}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+
+                            <td>{{score.0}}</td>
+                            <td>{{score.1}}</td>
+                        </tr>
+                        {% endif %}
+
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %} 

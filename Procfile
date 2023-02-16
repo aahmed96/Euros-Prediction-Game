@@ -1,0 +1,1 @@
+web: gunicorn Euros_Prediction_Game.wsgi --log-file -

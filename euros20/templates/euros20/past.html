@@ -1,0 +1,56 @@
+{% extends "euros20/layout.html" %}
+
+{% block body %}
+
+<div class="row page">
+    <div class="col-12">
+        <div class="row justify-content-center home">
+            <div class="col-9" style="padding:35px;background: #e2e2e2;border-radius:35px;margin:10px">
+                
+                <h3>Past Predictions</h3>
+                <div style="height: 800px;overflow:scroll;">
+                <table class = "table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Match</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Prediction</th>
+                            <th scope="col">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for match_predictions in m_preds %}
+                        {% if match_predictions %}
+                        {% for x in match_predictions %}
+                        <tr>
+                            {% if forloop.first %}
+                            {% if x.match_id.score_1 is None %}
+                            <td>{{x.match_id.team_1}} vs {{x.match_id.team_2}}</td>
+                            {% else %}
+                            <td>{{x.match_id.team_1}} {{x.match_id.score_1}} - {{x.match_id.score_2}} {{x.match_id.team_2}}</td>
+                            {% endif %}
+                            {% else %}
+                            <td></td>
+                            {% endif %}
+
+                            {% if x.user_id.pk == userID %}
+                            <td style="background-color: #056978;color: white"> {{x.user_id.first_name}} {{x.user_id.last_name}}</td>
+                            {% else %}
+                            <td> {{x.user_id.first_name}} {{x.user_id.last_name}}</td>
+                            {% endif %}
+                            <td> {{x.p_score1}} - {{x.p_score2}} </td>
+                            {% if x.p_points %}
+                            <td> {{x.p_points}}</td>
+                            {% else %}
+                            <td> 0 </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+                
+{% endblock %} 

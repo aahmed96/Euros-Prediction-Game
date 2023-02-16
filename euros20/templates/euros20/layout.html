@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+         <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="{%static 'euros20/styles.css'%}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <title>Euros Rigged</title>
+
+ 
+</head>
+    <body>
+
+        {% block topbar %}
+        <div class="container-fluid">
+            <div class="row nav-bar align-items-end">
+    
+              <div class="col-2 left">
+                <div class="row">
+                    <div class="col logo">
+                    </div>
+                </div>
+              </div>
+    
+              <div class="col-5 middle">
+    
+                <span class="options">
+                    <a href="{% url 'homeNew' %}">Home</a> &nbsp;&nbsp;/&nbsp;&nbsp; 
+                    
+                    <a href="{% url 'randr' %}">Rules & Rewards</a> &nbsp;&nbsp;/&nbsp;&nbsp;  
+                    
+                    
+                </span>
+              </div>
+    
+              <div class="col-2 offset-md-2 right">
+                <div class="row" style="text-align: center;">
+                    <div class="col show-border-right">
+                        <a href="#">{{request.user}}</a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+              </div>
+    
+            </div>
+            {% endblock %}
+            <div class="row page">
+                <div class="col-12"> 
+            {% block body %}
+        
+
+        {% endblock %}
+    </div>
+</div>
+    </body>
+</html>
